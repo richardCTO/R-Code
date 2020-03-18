@@ -1,0 +1,1 @@
+{"x":{"class":["numeric"],"type":"double","length":1,"str":"num 10"},"y":{"class":["numeric"],"type":"double","length":1,"str":"num 8"},"iris":{"class":["data.frame"],"type":"list","length":5,"str":"'data.frame':\t150 obs. of  5 variables:","names":["Sepal.Length","Sepal.Width","Petal.Length","Petal.Width","Species"]}}
