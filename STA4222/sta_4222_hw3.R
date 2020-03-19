@@ -1,4 +1,3 @@
-
 #install.packages("tidyverse")
 #install.packages("survey")
 library(foreign)
@@ -20,6 +19,7 @@ head(forest_data)
 tail(forest_data)
 ncol(forest_data)
 
+
 summary(forest_data[, c("Age", "Diameter")])
 
 mydesign <- svydesign(
@@ -27,6 +27,7 @@ mydesign <- svydesign(
     data = forest_data
 )
 mydesign
+
 
 svyratio(~Age, ~Diameter, mydesign)
 myrations <- svyratio(~Age, ~Diameter, mydesign)
@@ -40,7 +41,7 @@ reg_lm
 summary(reg_lm)
 
 # ==========================================
-#           Question 2
+#               Question 2
 #===========================================
 
 cherry_data <- read.csv("STA4222/Data/cherry.csv",
