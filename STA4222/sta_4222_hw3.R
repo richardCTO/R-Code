@@ -7,6 +7,7 @@ library(tidyverse)
 forest_data <- read.csv("STA4222/Data/forest.csv",
     header = TRUE
 )
+head(forest_data)
 
 ggplot(data = forest_data) + ggtitle("Age vs Diameter") +
     geom_point(mapping = aes(
@@ -19,6 +20,21 @@ head(forest_data)
 tail(forest_data)
 ncol(forest_data)
 
+# ==========================================
+#               Question 1
+#===========================================
+
+population_size <- 1132
+x_bar <- 10.3
+t_x <- x_bar * population_size
+x <- forest_data$Diameter
+y <- forest_data$Age
+x_bar <- mean(x)
+x_bar
+y_bar <- mean(y)
+y_bar
+b_hat <-  y_bar / x_bar
+b_hat
 
 summary(forest_data[, c("Age", "Diameter")])
 
