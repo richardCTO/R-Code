@@ -28,37 +28,18 @@ b_hat <-  y_bar / x_bar
 ratio_est <- b_hat * x_baru
 ratio_est
 
-# 1b est standard error
-standard_error <- function(x) sd(x) / sqrt(length(x))
-standard_error(x)
+# 1b error
+# calculate residuals
+e <- y - b_hat * x
+se2 <- sum(e^2) / (n - 1)
+se2
 
-error <- y - b_hat * x
-standard_error <- sd(error)
-standard_error
-sample_size <- length(y)
-sample_size
-
-# 1c
-reg_lm <- lm(Age ~ Diameter, data = forest_data)
-summary(reg_lm)
-
- # Estimate of b
-sample_bhat <- (sqrt((1 - sample_size /
-    population_size) /
-    sample_size)) *
-    (standard_error /
-        x_bar
-    )
-
-b_hat
-sample_bhat
+## estimate variance of the ratio estimator
+se.Bhat <- sqrt(se2 / (n * mean(x)^2))
 
 ## calculate 95% CI of the ratio estimator
-ci_bhat <- c(b_hat - qnorm(0.975) *
-    standard_error, b_hat +
-    qnorm(0.975) * standard_error)
-ci_bhat
-
+ci.Bhat <- c(b_hat - qnorm(0.975) * se.Bhat, b_hat + qnorm(0.975) * se.Bhat)
+ci.Bhat
 # ==========================================
 #               Question 2
 #===========================================
@@ -66,6 +47,7 @@ cherry_data <- read.csv("STA4222/Data/cherry.csv",
     header = TRUE
 )
 head(cherry_data)
+
 
 # 2a
 plot(
@@ -75,11 +57,20 @@ plot(
     )
 )
 
-# 2b
+# 2b The estimated population total volume
 N <- 2967
 tx <- 41835
-xu <- tx / N
-xu
+
+x <- cherry_data$diameter
+y <- cherry_data$volume
+
+x_bar <- mean(x)
+y_bar <- mean(y)
+
+b_hat <- y_bar / x_bar
+
+ty_r <- b_hat * tx
+ty_r
 
 # ==========================================
 #               Question 3
@@ -116,8 +107,8 @@ ybar_domain
 standard_error <- function(x) sd(x) / sqrt(length(x))
 standard_error(u)
 
-# 3c calculate 95% CI of the ratio estimator
-install.packages("Rmisc")
+# 3c calculate 99% CI of the ratio estimator
+#install.packages("Rmisc")
 library(Rmisc)
 CI(u, ci = .99)
 
