@@ -14,32 +14,61 @@ plot(
     )
 )
 
+xu <- 10.3
+sample_size <- 20
 population_size <- 1132
-x_baru <- 10.3
-t_x <- x_baru * population_size
-x <- forest_data$Diameter
-y <- forest_data$Age
-x_bar <- mean(x)
-y_bar <- mean(y)
-b_hat <-  y_bar / x_bar
+r <- cor(forest_data$Diameter, forest_data$Age)
+x <- forest_data$Age
+y <- forest_data$Diameter
+sx <- sd(forest_data$Diameter)
+sy <- sd(forest_data$Age)
+ybar <- mean(forest_data$Age)
+ybar
+xbar <- mean(forest_data$Diameter)
+xbar
+b1 <- r * sy / sx
+b1
+b0 <- ybar - b1 * xbar
+b0
 
-#1b
-# Ratio estimate of the population mean
-ratio_est <- b_hat * x_baru
-ratio_est
+## 1b ratio estimator
+b_hat <- ybar / xbar
+b_hat
+e <- y - b_hat * x
+
+ybar_r <- b_hat * xu
+ybar_r
+
+se_ybar_d2 <- sqrt((1 - sample_size /
+    population_size) *
+    xu / xbar * (321.93 /
+        sample_size))
+se_ybar_d2
 
 # 1b error
-# calculate residuals
-e <- y - b_hat * x
-se2 <- sum(e^2) / (n - 1)
-se2
+se_ybar_r <- (xu / mean(x)) * sqrt((1 - sample_size /
+    population_size) *
+    var(e) / sample_size)
 
-## estimate variance of the ratio estimator
-se.Bhat <- sqrt(se2 / (n * mean(x)^2))
+se_ybar_r
 
-## calculate 95% CI of the ratio estimator
-ci.Bhat <- c(b_hat - qnorm(0.975) * se.Bhat, b_hat + qnorm(0.975) * se.Bhat)
-ci.Bhat
+# 1c regression estimate population mean
+xu <- 10.3
+ybar_reg <- b0 + (b1 * xu)
+ybar_reg
+
+# 1c standard error of the regression estimate
+se_ybar_reg <- sqrt((1 - sample_size / population_size) *
+    sy^2 * (1 - r^2) /
+    sample_size)
+se_ybar_reg
+
+eff_reg <- (se_ybar_r / se_ybar_reg)^2
+eff_reg
+
+# plot with regrssion line
+abline(lm(Age ~ Diameter, data = forest_data), col = "red")
+
 # ==========================================
 #               Question 2
 #===========================================
