@@ -1,79 +1,127 @@
-#install.packages("tidyverse")
-#install.packages("survey")
-library(foreign)
-library(survey)
-library(tidyverse)
-
+# ==========================================
+#               Question 1
+#===========================================
+# 1a
 forest_data <- read.csv("STA4222/Data/forest.csv",
     header = TRUE
 )
 head(forest_data)
 
-ggplot(data = forest_data) + ggtitle("Age vs Diameter") +
-    geom_point(mapping = aes(
-        x = Diameter,
-        y = Age,
-    ))
-
-class(forest_data)
-head(forest_data)
-tail(forest_data)
-ncol(forest_data)
-
-# ==========================================
-#               Question 1
-#===========================================
+plot(
+    forest_data$Diameter, forest_data$Age,
+    title(
+        main = "Diameter vs Age"
+    )
+)
 
 population_size <- 1132
-x_bar <- 10.3
-t_x <- x_bar * population_size
+x_baru <- 10.3
+t_x <- x_baru * population_size
 x <- forest_data$Diameter
 y <- forest_data$Age
 x_bar <- mean(x)
-x_bar
 y_bar <- mean(y)
-y_bar
 b_hat <-  y_bar / x_bar
-b_hat
 
-summary(forest_data[, c("Age", "Diameter")])
+#1b
+# Ratio estimate of the population mean
+ratio_est <- b_hat * x_baru
+ratio_est
 
-mydesign <- svydesign(
-    id = ~TreeNo,
-    data = forest_data
-)
-mydesign
+# 1b est standard error
+standard_error <- function(x) sd(x) / sqrt(length(x))
+standard_error(x)
 
+error <- y - b_hat * x
+standard_error <- sd(error)
+standard_error
+sample_size <- length(y)
+sample_size
 
-svyratio(~Age, ~Diameter, mydesign)
-myrations <- svyratio(~Age, ~Diameter, mydesign)
-confint(myrations)
-cor(forest_data$Age, forest_data$Diameter)
-
-reg_lm <- lm(Diameter ~ Age,
-    data = forest_data
-)
-reg_lm
+# 1c
+reg_lm <- lm(Age ~ Diameter, data = forest_data)
 summary(reg_lm)
+
+ # Estimate of b
+sample_bhat <- (sqrt((1 - sample_size /
+    population_size) /
+    sample_size)) *
+    (standard_error /
+        x_bar
+    )
+
+b_hat
+sample_bhat
+
+## calculate 95% CI of the ratio estimator
+ci_bhat <- c(b_hat - qnorm(0.975) *
+    standard_error, b_hat +
+    qnorm(0.975) * standard_error)
+ci_bhat
 
 # ==========================================
 #               Question 2
 #===========================================
-
 cherry_data <- read.csv("STA4222/Data/cherry.csv",
     header = TRUE
 )
 head(cherry_data)
 
-ggplot(data = cherry_data) + ggtitle("Diameter vs. Volume") +
-    geom_point(mapping = aes(
-        x = diameter,
-        y = volume,
-    ))
-cherry_design <- svydesign(
-    id = ~1,
-    data = cherry_data
+# 2a
+plot(
+    cherry_data$volume, cherry_data$volume,
+    title(
+        main = "Diameter vs Volume"
+    )
 )
-cherry_design
-cherry_rations <- svyratio(~diameter, ~volume, cherry_design)
-confint(cherry_rations)
+
+# 2b
+N <- 2967
+tx <- 41835
+xu <- tx / N
+xu
+
+# ==========================================
+#               Question 3
+#===========================================
+population_size <- 480000
+sample_size <- 940
+
+num_pets <- c(0, 1, 2, 3, 4, 5, 8, 10)
+num_respondents  <- c(550, 320, 45, 15, 6, 2, 1, 1)
+n1 <- sum(num_respondents)
+
+# 3a estimate proportion
+sample_size <- 940
+x_bar <- (320 + 45 + 15 + 6 + 2 + 1 + 1)
+y <- sample_size
+
+p_hat <- x_bar / y
+p_hat
+
+# 3a standard error
+error <- sqrt((p_hat * (1 - p_hat)) / n1)
+error # standard error
+
+# 3b estimate domain mean
+u <- c(
+    rep(0, 550), rep(1, 320),
+    rep(2, 45), rep(3, 15), rep(4, 6),
+    rep(5, 2), rep(8, 1), rep(10, 1)
+)
+ybar_domain <- mean(u) / (n1 / sample_size)
+ybar_domain
+
+# 3b standard error
+standard_error <- function(x) sd(x) / sqrt(length(x))
+standard_error(u)
+
+# 3c calculate 95% CI of the ratio estimator
+install.packages("Rmisc")
+library(Rmisc)
+CI(u, ci = .99)
+
+# 3d Estimate the total number of pets
+tx <- population_size * .04225
+tx
+# 3d standard error
