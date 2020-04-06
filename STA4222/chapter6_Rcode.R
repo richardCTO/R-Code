@@ -69,7 +69,6 @@ ages[[8]] <- c(89, 67, 69, 89, 77, 60)
 m <- sapply(ages, length)
 s2 <- sapply(ages, var)
 
-
 ybar.cls <- vector(length = n)
 for (i in 1:n) {
     ybar.cls[i] <- mean(ages[[i]])
@@ -84,12 +83,3 @@ var.bcls <- (1 - n / N) * sr2 / (n * mean(M)^2)
 var.wcls <- sum(M^2 * (1 - m / M) * s2 / m) / (n * N * mean(M)^2)
 se.ybar.r <- sqrt(var.bcls + var.wcls)
 se.ybar.r
-
- 
-
-
-
-
-
-
-
