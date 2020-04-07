@@ -12,7 +12,7 @@ sample_size <- 10
 goining_on_trip <- sum(spanish_data$trip == 1)
 goining_on_trip
 
-# 2a estimate the total number of students planing a trip
+##  2a estimate the total number of students planing a trip
 t_hat <- population_size / sample_size * goining_on_trip
 t_hat
 
@@ -32,11 +32,11 @@ m8 <- sum(spanish_data[which(spanish_data$class == 23 & spanish_data$trip == 1),
 m9 <- sum(spanish_data[which(spanish_data$class == 4 & spanish_data$trip == 1), 3])
 m10 <- sum(spanish_data[which(spanish_data$class == 39 & spanish_data$trip == 1), 3])
 
-total <- (m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9 + m10)
+total <- sum(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10)
 total
 
 n <- 10
-# calculate s^2
+##  calculate s^2
 s_squard <- ((1 / (n - 1)) *
     (((m1 - t_bar)^2) + ((m2 - t_bar)^2) +
         ((m3 - t_bar)^2) + ((m4 - t_bar)^2) +
@@ -48,7 +48,7 @@ s_squard
 # standard error
 error <- population_size * sqrt((1 - n / population_size) * (s_squard / n))
 error
-# 2a confidence interval 
+##  2a confidence interval 
 ci_1 <- (t_hat - 1.96 * (error))
 ci_2 <- (t_hat + 1.96 * (error))
 ci <- c(ci_1, ci_2)
@@ -118,14 +118,93 @@ total_m_2
 
 m_bar <- total_m / sample_size
 
-# standard error
+##  standard error
 error_2 <- sqrt(((1 - (sample_size) / (population_size)) *
     (1 / ((sample_size) * ((m_bar)^2))) *
     ((total_m_2) / (sample_size - 1))))
 error_2
 
-# confidence interval for part 2b
+##  confidence interval for part 2b
 ci2_1 <- (y_bar - 1.96 * (error_2))
 ci2_2 <- (y_bar + 1.96 * (error_2))
 ci2 <- c(ci2_1, ci2_2)
 ci2
+
+# ==========================================
+#               Problem 3
+# ==========================================
+
+n <- 6
+population_size <- 45
+
+y1 <- c(146, 180, 251, 152, 72, 181, 171, 361, 73, 186)
+y2 <- c(99, 101, 52, 121)
+y3 <- c(199, 179, 98, 63, 126, 87, 62)
+y4 <- c(226, 129, 57, 46, 86, 43, 85, 165)
+y5 <- c(12, 23)
+y6 <- c(87, 43, 59)
+
+M1 <- length(y1)
+M2 <- length(y2)
+M3 <- length(y3)
+M4 <- length(y4)
+M5 <- length(y5)
+M6 <- length(y6)
+M <- c(M1, M2, M3, M4, M5, M6)
+
+
+m1 <- 52
+m2 <- 19
+m3 <- 37
+m4 <- 39
+m5 <- 8
+m6 <- 14
+m_total <- sum(m1, m2, m3, m4, m5, m6)
+
+t1 <- sum(y1)
+t2 <- sum(y2)
+t3 <- sum(y3)
+t4 <- sum(y4)
+t5 <- sum(y5)
+t6 <- sum(y6)
+t <- c(t1, t2, t3, t4, t5, t6)
+
+x1_bar <- mean(y1)
+x2_bar <- mean(y2)
+x3_bar <- mean(y3)
+x4_bar <- mean(y4)
+x5_bar <- mean(y5)
+x6_bar <- mean(y6)
+
+sd1 <- sd(y1)
+sd2 <- sd(y2)
+sd3 <- sd(y3)
+sd4 <- sd(y4)
+sd5 <- sd(y5)
+sd6 <- sd(y6)
+
+t1_hat <- m1 * x1_bar
+t2_hat <- m2 * x2_bar
+t3_hat <- m3 * x3_bar
+t4_hat <- m4 * x4_bar
+t5_hat <- m5 * x5_bar
+t6_hat <- m6 * x6_bar
+t_total <- sum(t1_hat, t2_hat, t3_hat, t4_hat, t5_hat, t6_hat)
+
+##  question 9 the unbiased estimate for the total number of cases sold
+t_hat <- (population_size / n) * (t_total)
+t_hat
+
+##  question 11 the average number of cases sold
+xbar_hat <- t_total / m_total
+xbar_hat
+
+## ratio estimator of the population mean
+ybar.r <- sum(t) / sum(M)
+ybar.r
+
+##  question 12 standard error y bar 
+se.ybar.r <- sqrt((1 - n / population_size)
+* sum((t - M * ybar.r)^2)
+    / ((n - 1) * sum(M)^2 / n))
+se.ybar.r
