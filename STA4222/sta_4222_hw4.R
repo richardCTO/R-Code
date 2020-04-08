@@ -144,6 +144,9 @@ y4 <- c(226, 129, 57, 46, 86, 43, 85, 165)
 y5 <- c(12, 23)
 y6 <- c(87, 43, 59)
 
+a <- c(y1, y2, y3, y4, y5, y6)
+plot(a)
+
 M1 <- length(y1)
 M2 <- length(y2)
 M3 <- length(y3)
@@ -200,11 +203,19 @@ xbar_hat <- t_total / m_total
 xbar_hat
 
 ## ratio estimator of the population mean
-ybar.r <- sum(t) / sum(M)
+ybar.r <- sum(t) / m_total
 ybar.r
 
 ##  question 12 standard error y bar 
 se.ybar.r <- sqrt((1 - n / population_size)
 * sum((t - M * ybar.r)^2)
-    / ((n - 1) * sum(M)^2 / n))
+    / ((n - 1) * M^2 / n))
 se.ybar.r
+
+## unbiased estimator of the population total
+ybar.unb <- population_size * mean(t)
+ybar.unb
+
+se.ybar.unb <- population_size * sqrt((1 - n / population_size) * var(t) / n)
+se.ybar.unb
+
