@@ -48,7 +48,8 @@ s_squard
 # standard error
 error <- population_size * sqrt((1 - n / population_size) * (s_squard / n))
 error
-##  2a confidence interval
+
+##  2a confidence interval 
 ci_1 <- (t_hat - 1.96 * (error))
 ci_2 <- (t_hat + 1.96 * (error))
 ci <- c(ci_1, ci_2)
@@ -145,11 +146,9 @@ y5 <- c(12, 23)
 y6 <- c(87, 43, 59)
 
 a <- c(y1, y2, y3, y4, y5, y6)
-plot(a,
-    main = "Cases Sold",
-    xlab = "Index",
-    ylab = "Number of caces sold"
-)
+plot(a, main="Cases Sold",
+        xlab="Index",
+        ylab="Number of caces sold")
 
 M1 <- length(y1)
 M2 <- length(y2)
@@ -197,28 +196,20 @@ t4_hat <- m4 * x4_bar
 t5_hat <- m5 * x5_bar
 t6_hat <- m6 * x6_bar
 t_total <- sum(t1_hat, t2_hat, t3_hat, t4_hat, t5_hat, t6_hat)
-t_total
 
-## the unbiased estimate for the total number of cases sold
+##  question 9 the unbiased estimate for the total number of cases sold
 t_hat <- (population_size / n) * (t_total)
 t_hat
 
-## the average number of cases sold
+##  question 11 the average number of cases sold
 xbar_hat <- t_total / m_total
 xbar_hat
 
-## The standard error of the estimated average number of cases sold
-ybar_r <- sum(t) / sum(M)
-ybar_r
+##  question 12 standard error y bar 
+ybar.r <- sum(t) / sum(M)
+ybar.r
 
-se_ybar_r <- sqrt((1 - n / N) *
-    sum((t - M * ybar_r)^2) /
-    ((n - 1) * sum(M)^2 / n))
-se_ybar_r
-
-## The standard error of the estimated total number of cases sold
-ybar_unb <- population_size * mean(t)
-ybar_unb
-
-se_ybar_unb <- population_size * sqrt((1 - n / population_size) * var(t) / n)
-se_ybar_unb
+se.ybar.r <- sqrt((1 - n / N)
+* sum((t - M * ybar.r)^2)
+    / ((n - 1) * sum(M)^2 / n))
+se.ybar.r
