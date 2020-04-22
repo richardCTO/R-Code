@@ -38,12 +38,41 @@ phi10 <- 0.0508055
 length(y1)
 
 y1_bar <- sum(y1) / length(y1)
-y1_bar <- sum(y1) / length(y1)
-y1_bar <- sum(y1) / length(y1)
-y1_bar <- sum(y1) / length(y1)
-y1_bar <- sum(y1) / length(y1)
-y1_bar <- sum(y1) / length(y1)
-y1_bar <- sum(y1) / length(y1)
-y1_bar <- sum(y1) / length(y1)
-y1_bar <- sum(y1) / length(y1)
-y1_bar <- sum(y1) / length(y1)
+y2_bar <- sum(y2) / length(y2)
+y3_bar <- sum(y3) / length(y3)
+y4_bar <- sum(y4) / length(y4)
+y5_bar <- sum(y5) / length(y5)
+y6_bar <- sum(y6) / length(y6)
+y7_bar <- sum(y7) / length(y7)
+y8_bar <- sum(y8) / length(y8)
+y9_bar <- sum(y9) / length(y9)
+y10_bar <- sum(y10) / length(y10)
+
+
+t1_hat <- m1 * y1_bar
+t2_hat <- m2 * y2_bar
+t3_hat <- m3 * y3_bar
+t4_hat <- m4 * y4_bar
+t5_hat <- m5 * y5_bar
+t6_hat <- m6 * y6_bar
+t7_hat <- m7 * y7_bar
+t8_hat <- m8 * y8_bar
+t9_hat <- m9 * y9_bar
+t10_hat <- m10 * y10_bar
+
+t1_bar <- t1_hat / phi1
+t2_bar <- t2_hat / phi2
+t3_bar <- t3_hat / phi3
+t4_bar <- t4_hat / phi4
+t5_bar <- t5_hat / phi5
+t6_bar <- t6_hat / phi6
+t7_bar <- t7_hat / phi7
+t8_bar <- t8_hat / phi8
+t9_bar <- t9_hat / phi9
+t10_bar <- t10_hat / phi10
+
+total <- sum(
+    t1_bar, t2_bar, t3_bar, t4_bar, t5_bar,
+    t6_bar, t7_bar, t8_bar, t9_bar, t10_bar
+) / 10
+total
