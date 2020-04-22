@@ -75,7 +75,6 @@ total <- sum(
     t1_bar, t2_bar, t3_bar, t4_bar, t5_bar,
     t6_bar, t7_bar, t8_bar, t9_bar, t10_bar
 ) / 10
-
 total
 
 diff1 <- (t1_bar - total) ^ 2
@@ -94,6 +93,9 @@ total_diff <- sum(
     diff6, diff7, diff8, diff9, diff10
 )
 
-
 error <- sqrt((1 / 10) * (total_diff / 9))
 error
+
+# ==========================================
+#               Problem 2
+# ==========================================
