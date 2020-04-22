@@ -75,4 +75,25 @@ total <- sum(
     t1_bar, t2_bar, t3_bar, t4_bar, t5_bar,
     t6_bar, t7_bar, t8_bar, t9_bar, t10_bar
 ) / 10
+
 total
+
+diff1 <- (t1_bar - total) ^ 2
+diff2 <- (t2_bar - total) ^ 2
+diff3 <- (t3_bar - total) ^ 2
+diff4 <- (t4_bar - total) ^ 2
+diff5 <- (t5_bar - total) ^ 2
+diff6 <- (t6_bar - total) ^ 2
+diff7 <- (t7_bar - total) ^ 2
+diff8 <- (t8_bar - total) ^ 2
+diff9 <- (t9_bar - total) ^ 2
+diff10 <- (t10_bar - total) ^ 2
+
+total_diff <- sum(
+    diff1, diff2, diff3, diff4, diff5,
+    diff6, diff7, diff8, diff9, diff10
+)
+
+
+error <- sqrt((1 / 10) * (total_diff / 9))
+error
