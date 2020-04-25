@@ -99,3 +99,41 @@ error
 # ==========================================
 #               Problem 2
 # ==========================================
+
+
+state_data <- read.csv("Data/statepop.csv")
+head(state_data)
+
+sample_size <- 100
+
+m_i <- 255077536
+
+state_data$probability <- state_data$veterans / state_data$popn
+head(state_data)
+
+plot(state_data$veterans, state_data$probability)
+
+state_data$w_i <- (1 / sample_size) * (state_data$probability)
+head(state_data)
+
+# total est
+t_phi <- sum(state_data$w_i) * m_i
+t_phi
+
+sd_t_phi <- sd(state_data$w_i) * sample_size * m_i
+sd_t_phi
+
+# S.E.
+error <- sd_t_phi / sqrt(sample_size)
+error
+
+state_data$viet_perc <- state_data$percviet / 100
+state_data$vietvet <- state_data$veterans * state_data$viet_perc
+head(state_data)
+
+state_data$vet <- state_data$vietvet / sum(state_data$w_i)
+sum(state_data$vet)
+head(state_data)
+
+s_d <- sd(state_data$vet)
+s_d
