@@ -1,0 +1,1 @@
+{"my_data":{"class":["tbl_df","tbl","data.frame"],"type":"list","length":2,"str":"tibble [10,000 × 2] (S3: tbl_df/tbl/data.frame)","names":["GROUP","BLOODPRESSURE"]},"problem1_data":{"class":["data.frame"],"type":"list","length":2,"str":"'data.frame':\t10000 obs. of  2 variables:","names":["GROUP","BLOODPRESSURE"]}}
