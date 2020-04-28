@@ -1,5 +1,5 @@
 # ==========================================
-#               Problem 
+#               Problem 1
 # ==========================================
 # Loading
 library("readxl")
@@ -12,7 +12,6 @@ my_data <- read_excel("STA4102/Data/Project3.xlsx",
 head(my_data)
 
 write_csv(my_data, path = "STA4102/Data/Project3.csv")
-
 problem1_data <- read.csv("STA4102/Data/Project3.csv", header = TRUE)
 head(problem1_data)
 
@@ -43,3 +42,25 @@ ggboxplot(problem1_data,
        xlab = "GROUPS"
 )
 
+# ==========================================
+#               Problem 2
+# ==========================================
+
+# Loading
+library("readxl")
+library("readr")   # Fast csv write
+
+my_data2 <- read_excel("STA4102/Data/Project3.xlsx",
+       sheet = "PROBLEM2",
+       col_types = c("text", "numeric")
+)
+head(my_data2)
+
+write_csv(my_data2, path = "STA4102/Data/Project3_Problem2.csv")
+problem2_data <- read.csv("STA4102/Data/Project3_Problem2.csv", header = TRUE)
+head(problem2_data)
+
+# Compute the analysis of variance
+res_aov <- aov(DAYS_TO_DEATH ~ TREATMENT, data = problem2_data)
+# Summary of the analysis
+summary(res_aov)
