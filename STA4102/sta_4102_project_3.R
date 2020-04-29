@@ -33,7 +33,8 @@ group_by(problem1_data, GROUP) %>%
 
 # Plot weight by group and color by group
 library("ggpubr")
-ggboxplot(problem1_data,
+ggboxplot(
+       problem1_data,
        x = "GROUP",
        y = "BLOODPRESSURE",
        color = "GROUP",
@@ -64,3 +65,57 @@ head(problem2_data)
 res_aov <- aov(DAYS_TO_DEATH ~ TREATMENT, data = problem2_data)
 # Summary of the analysis
 summary(res_aov)
+
+# ==========================================
+#               Problem 3
+# ==========================================
+
+# Loading
+library("readxl")
+library("readr")   # Fast csv write
+
+my_data3 <- read_excel("STA4102/Data/Project3.xlsx",
+       sheet = "PROBLEM3",
+       col_types = c("numeric", "numeric")
+)
+head(my_data3)
+
+write_csv(my_data3, path = "STA4102/Data/Project3_Problem3.csv")
+problem3_data <- read.csv("STA4102/Data/Project3_Problem3.csv", header = TRUE)
+head(problem3_data)
+
+# build linear regression model on full data
+l_reg <- lm(calories ~ systolic_bp, data = problem3_data)
+print(l_reg)
+
+summary(l_reg)
+
+# scatterplot
+scatter.smooth(
+       x = problem3_data$calories,
+       y = problem3_data$systolic_bp,
+       main = "Calories ~ Systolic BP"
+)
+
+# ==========================================
+#               Problem 4
+# ==========================================
+
+# Loading
+library("readxl")
+library("readr") # Fast csv write
+
+# read excel file
+my_data4 <- read_excel("STA4102/Data/Project3.xlsx",
+       sheet = "PROBLEM4",
+       col_types = c("numeric", "numeric")
+)
+# print first 6 rows of data set to confirm corect output
+head(my_data4)
+
+# convert excel file into csv file for easier data manipulation
+write_csv(my_data4, path = "STA4102/Data/Project3_Problem4.csv")
+problem4_data <- read.csv("STA4102/Data/Project3_Problem4.csv", header = TRUE)
+
+# print first 6 rows of new csv file
+head(problem4_data)
